@@ -29,8 +29,8 @@ class Lasers:
 
 class Laser(Sprite):
     """A class to manage lasers fired from the ship"""
-    alien_laser_images = [pg.transform.rotozoom(pg.image.load(f'images/alien_laser/alienlaser{n}.png'), 0, 1) for n in range(2)]
-    ship_laser_images = [pg.transform.rotozoom(pg.image.load(f'images/ship_laser/laser_{n}.png'), 0, 1) for n in range(2)]
+    alien_laser_images = [pg.transform.rotozoom(pg.image.load(f'images/alien_laser/alienlaser{n}.png'), 0, 1) for n in range(4)]
+    ship_laser_images = [pg.transform.rotozoom(pg.image.load(f'images/ship_laser/laser_{n}.png'), 0, 1) for n in range(3)]
     laser_images = {LaserType.ALIEN: alien_laser_images, LaserType.SHIP: ship_laser_images}
 
     def __init__(self, settings, screen, x, y, sound, type):

@@ -32,7 +32,7 @@ class Game:
         self.aliens = Aliens(game=self)
         self.settings.initialize_speed_settings()
 
-        self.game_active = False
+        self.game_active = True
 
     def reset(self):
         print('Resetting game...')
