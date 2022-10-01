@@ -32,7 +32,7 @@ class Game:
         self.aliens = Aliens(game=self)
         self.settings.initialize_speed_settings()
 
-        self.game_active = True
+        self.game_active = False
 
     def reset(self):
         print('Resetting game...')
@@ -47,10 +47,6 @@ class Game:
         self.sound.gameover()
         pg.quit()     
         sys.exit()
-
-    #def check_play_button(self, play_button, mouse_x, mouse_y):
-    #    if play_button.rect.collidepoint(mouse_x, mouse_y):
-    #        self.game_active = True
 
     def play(self):
         self.sound.play_bg()
