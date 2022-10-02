@@ -7,8 +7,8 @@ from timer import Timer
 
 
 class Ship(Sprite):
-    ship_images = [pg.transform.rotozoom(pg.image.load(f'images/ship.png'), 0, 1.0)]
-    ship_explosion_images = [pg.image.load(f'images/ship_explosion/ship_explode{n}.png')for n in range(6)]
+    ship_images = [pg.transform.rotozoom(pg.image.load(f'images/ship/ship.png'), 0, 1.0)]
+    ship_explosion_images = [pg.image.load(f'images/ship/ship_explode{n}.png')for n in range(6)]
 
     def __init__(self, game):
         super().__init__()
@@ -17,7 +17,7 @@ class Ship(Sprite):
         self.settings = game.settings
         self.sound = game.sound
         self.ships_left = game.settings.ship_limit  
-        self.image = pg.image.load('images/ship.png')
+        self.image = pg.image.load('images/ship/ship.png')
         self.rect = self.image.get_rect()
         self.screen_rect = game.screen.get_rect()
         self.posn = self.center_ship()    # posn is the centerx, bottom of the rect, not left, top

@@ -15,6 +15,8 @@ class Button():
 
         self.prep_msg(msg)
 
+        self.game_active = False
+
     def prep_msg(self, msg):
         self.msg_image = self.font.render(msg, True, self.text_color, self.button_color)
         self.msg_image_rect = self.msg_image.get_rect()

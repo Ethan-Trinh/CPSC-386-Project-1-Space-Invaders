@@ -7,7 +7,7 @@ movement = {pg.K_LEFT: Vector(-1, 0),   # dictionary to map keys to Vector veloc
             pg.K_UP: Vector(0, -1),
             pg.K_DOWN: Vector(0, 1)
             }
-  
+
 def check_keydown_events(event, settings, ship):
     key = event.key
     if key == pg.K_SPACE: 
@@ -22,7 +22,8 @@ def check_keyup_events(event, ship):
 
 def check_play_button(play_button, mouse_x, mouse_y):
     if play_button.rect.collidepoint(mouse_x, mouse_y):
-        game_active = True
+        print("Game Start!")
+        play_button.game_active = True
 
 def check_events(settings, ship, play_button):
     for event in pg.event.get():

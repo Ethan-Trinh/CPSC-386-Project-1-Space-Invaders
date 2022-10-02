@@ -32,8 +32,6 @@ class Game:
         self.aliens = Aliens(game=self)
         self.settings.initialize_speed_settings()
 
-        self.game_active = True
-
     def reset(self):
         print('Resetting game...')
         #self.lasers.reset()
@@ -53,12 +51,12 @@ class Game:
         play_button = Button(settings=self.settings, screen=self.screen, msg="Play")
 
         while True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
-            if self.game_active == False:
+            if play_button.game_active == False:
                 gf.check_events(settings=self.settings, ship=self.ship, play_button=play_button)
                 play_button.draw_button()
                 pg.display.flip()
             
-            elif self.game_active == True:
+            elif play_button.game_active == True:
                 gf.check_events(settings=self.settings, ship=self.ship, play_button=play_button)
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
