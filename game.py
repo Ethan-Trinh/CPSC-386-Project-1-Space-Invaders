@@ -50,9 +50,6 @@ class Game:
         self.ship.stop()
         self.sound.gameover()
         self.play_button.game_active = False
-        
-        #pg.quit()     
-        #sys.exit()
 
     def play(self):
         self.sound.play_bg()
@@ -73,7 +70,6 @@ class Game:
                 self.barriers.update()
                 self.scoreboard.update()
                 pg.display.flip()
-
 
 def main():
     g = Game()

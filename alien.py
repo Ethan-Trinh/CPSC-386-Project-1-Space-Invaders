@@ -2,6 +2,7 @@ import pygame as pg
 from pygame.sprite import Sprite, Group
 from laser import Lasers
 from timer import Timer
+from barrier import Barriers
 import random
 
 
@@ -48,7 +49,7 @@ class Alien(Sprite):
         if not self.dying:
             self.dying = True 
             self.timer = self.timer_explosion
-            self.sb.increment_score()
+            self.sb.increment_score(type=self.type)
 
     def update(self): 
         if self.timer == self.timer_explosion and self.timer.is_expired():

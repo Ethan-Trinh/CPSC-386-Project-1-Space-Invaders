@@ -16,7 +16,7 @@ class Settings():
         self.lasers_every = 10
 
         self.aliens_shoot_every = 120
-        self.alien_points = 50
+        self.alien_points = {0: 10, 1: 20, 2: 50}
 
 # # TODO: set a ship_limit of 3
         self.ship_limit = 3         # total ships allowed in game before game over

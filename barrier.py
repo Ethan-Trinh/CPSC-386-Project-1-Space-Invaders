@@ -23,7 +23,6 @@ class Barrier(Sprite):
         pg.draw.rect(self.screen, Barrier.color, self.rect, 0, 20)
         pg.draw.circle(self.screen, self.settings.bg_color, (self.rect.centerx, self.rect.bottom), self.rect.width/6)
 
-
 class Barriers:
     def __init__(self, game):
         self.game = game

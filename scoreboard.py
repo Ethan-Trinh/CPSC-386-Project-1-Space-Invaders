@@ -30,8 +30,8 @@ class Scoreboard:
         #self.prep_lives()
 
 
-    def increment_score(self): 
-        self.score += self.settings.alien_points
+    def increment_score(self, type): 
+        self.score += self.settings.alien_points[type]
         self.prep_score()
 
     def prep_score(self): 
