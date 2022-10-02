@@ -31,6 +31,8 @@ class Game:
         self.ship = Ship(game=self)
         self.aliens = Aliens(game=self)
         self.settings.initialize_speed_settings()
+        
+        self.play_button = Button(settings=self.settings, screen=self.screen, msg="Play")
 
     def reset(self):
         print('Resetting game...')
@@ -42,22 +44,23 @@ class Game:
 
     def game_over(self):
         print('All ships gone: game over!')
+        self.scoreboard.reset()
         self.sound.gameover()
+        #self.play_button.game_active = False
         pg.quit()     
         sys.exit()
 
     def play(self):
         self.sound.play_bg()
-        play_button = Button(settings=self.settings, screen=self.screen, msg="Play")
 
         while True:     # at the moment, only exits in gf.check_events if Ctrl/Cmd-Q pressed
-            if play_button.game_active == False:
-                gf.check_events(settings=self.settings, ship=self.ship, play_button=play_button)
-                play_button.draw_button()
+            if self.play_button.game_active == False:
+                gf.check_events(settings=self.settings, ship=self.ship, play_button=self.play_button)
+                self.play_button.draw_button()
                 pg.display.flip()
             
-            elif play_button.game_active == True:
-                gf.check_events(settings=self.settings, ship=self.ship, play_button=play_button)
+            elif self.play_button.game_active == True:
+                gf.check_events(settings=self.settings, ship=self.ship, play_button=self.play_button)
                 self.screen.fill(self.settings.bg_color)
                 self.ship.update()
                 self.aliens.update()

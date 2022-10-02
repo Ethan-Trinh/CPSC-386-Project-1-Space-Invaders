@@ -162,6 +162,11 @@ class Aliens:
         if collisions:
             self.ship.hit()
 
+        #collisions = pg.sprite.spritecollide()
+
+    def ufo_appearance():
+        pass
+
     def update(self): 
         self.check_fleet_edges()
         self.check_fleet_bottom()
