@@ -1,5 +1,6 @@
 import pygame as pg 
-import csv
+from ship import Ship
+from pygame.sprite import Group
 # import pygame.font
 
 class Scoreboard:
@@ -7,7 +8,9 @@ class Scoreboard:
         self.score = 0
         self.level = 0
         self.high_score = 0
+        self.ships_left = 3
         
+        self.game = game
         self.settings = game.settings
         self.screen = game.screen
         self.screen_rect = self.screen.get_rect()
@@ -23,6 +26,8 @@ class Scoreboard:
         self.high_score_image = None
         self.high_score_rect = None
         self.prep_high_score()
+
+        #self.prep_lives()
 
 
     def increment_score(self): 
@@ -51,7 +56,6 @@ class Scoreboard:
             if high_score_read > self.high_score:
                 self.high_score = high_score_read
 
-
     def prep_high_score(self):
         high_score_str = str(self.high_score)
         self.high_score_image = self.font.render(high_score_str, True, self.text_color, self.settings.bg_color)
@@ -59,6 +63,17 @@ class Scoreboard:
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.center = self.screen_rect.center
         self.high_score_rect.top = 20
+
+    def display_lives():
+        pass
+
+    def prep_lives(self):
+        self.ships = Group()
+        for ships_number in range(self.ships_left):
+            ship = Ship(game=self.game)
+            ship.rect.x = 10 + ships_number * ship.rect.width
+            ship.rect.y = 10
+            self.ships.add(ship)
 
     def reset(self): 
         self.high_score = self.score

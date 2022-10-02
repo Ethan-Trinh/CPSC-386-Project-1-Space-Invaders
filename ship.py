@@ -8,10 +8,10 @@ from timer import Timer
 
 class Ship(Sprite):
     ship_images = [pg.transform.rotozoom(pg.image.load(f'images/ship/ship.png'), 0, 1.0)]
-    ship_explosion_images = [pg.image.load(f'images/ship/ship_explode{n}.png')for n in range(6)]
+    ship_explosion_images = [pg.image.load(f'images/ship/ship_explode{n}.png')for n in range(10)]
 
     def __init__(self, game):
-        super().__init__()
+        super(Ship, self).__init__()
         self.game = game
         self.screen = game.screen
         self.settings = game.settings

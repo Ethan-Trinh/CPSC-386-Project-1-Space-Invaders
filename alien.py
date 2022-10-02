@@ -162,7 +162,8 @@ class Aliens:
         if collisions:
             self.ship.hit()
 
-        #collisions = pg.sprite.spritecollide()
+        #collisions = pg.sprite.spritecollide(self.ship_lasers, self.aliens_lasers, True)
+
 
     def ufo_appearance():
         pass
