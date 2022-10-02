@@ -17,6 +17,7 @@ class Ship(Sprite):
         self.settings = game.settings
         self.sound = game.sound
         self.ships_left = game.settings.ship_limit  
+        self.ships_start = game.settings.ship_limit  
         self.image = pg.image.load('images/ship/ship.png')
         self.rect = self.image.get_rect()
         self.screen_rect = game.screen.get_rect()
@@ -44,6 +45,16 @@ class Ship(Sprite):
         self.posn = self.center_ship()
         self.dying = self.dead = False
         self.lasers.reset()
+        self.timer = self.timer_normal
+        self.timer_explosion.reset()
+        self.rect.left, self.rect.top = self.posn.x, self.posn.y
+
+    def stop(self):
+        self.lasers.reset()
+        self.vel = Vector()
+        self.posn = self.center_ship()
+        self.dying = self.dead = False
+        self.ships_left = self.ships_start
         self.timer = self.timer_normal
         self.timer_explosion.reset()
         self.rect.left, self.rect.top = self.posn.x, self.posn.y

@@ -17,7 +17,7 @@ class Alien(Sprite):
                     2: Timer(image_list=alien_images2),
                     3: Timer(image_list=alien_images3)}
                     
-    alien_explosion_images = [pg.image.load(f'images/explode{n}.png') for n in range(7)]
+    alien_explosion_images = [pg.image.load(f'images/alien_explosion/explode{n}.png') for n in range(10)]
     
     def __init__(self, game, type):
         super().__init__()
@@ -165,7 +165,9 @@ class Aliens:
         #collisions = pg.sprite.spritecollide(self.ship_lasers, self.aliens_lasers, True)
 
 
-    def ufo_appearance():
+    def ufo_appearance(self):
+        alien = Alien(game=self.game, type=3)
+        alien.draw()
         pass
 
     def update(self): 
@@ -173,6 +175,7 @@ class Aliens:
         self.check_fleet_bottom()
         self.check_collisions()
         self.check_fleet_empty()
+        self.ufo_appearance()
         self.shoot_from_random_alien()
         for alien in self.aliens.sprites():
             if alien.dead:      # set True once the explosion animation has completed
