@@ -1,5 +1,7 @@
-class Settings():
+class Settings:
     """A class to store all settings for Alien Invasion."""
+
+    alien_points = {0: 10, 1: 20, 2: 40, 3: 100}
 
     def __init__(self):
         """Initialize the game's settings."""
@@ -8,27 +10,27 @@ class Settings():
         self.screen_height = 800
         self.bg_color = (150, 150, 150)
         self.title_color = (0, 0, 0)
-        
-# # TODO: test laser with a really wide laser
+
         self.laser_width = 5
         self.laser_height = 30
         self.laser_color = 255, 0, 0
-        self.lasers_every = 10
+        self.lasers_every = 30
 
-        self.aliens_shoot_every = 120
-        self.alien_points = {0: 10, 1: 20, 2: 50}
+        self.aliens_shoot_every = 600       # about every 2 seconds at 60 fps
+        self.ufo_spawn_every = 6000
 
-# # TODO: set a ship_limit of 3
-        self.ship_limit = 3         # total ships allowed in game before game over
+        self.alien_points = {0: 10, 1: 20, 2: 50, 3: 100}
+
+        self.ship_limit = 3        # total ships allowed in game before game over
 
         self.fleet_drop_speed = 10
         self.fleet_direction = 1     # change to a Vector(1, 0) move to the right, and ...
         self.initialize_speed_settings()
 
     def initialize_speed_settings(self):
-        self.alien_speed_factor = 1
-        self.ship_speed_factor = 3
-        self.laser_speed_factor = 3
+        self.alien_speed_factor = 0.5
+        self.ship_speed_factor = 1
+        self.laser_speed_factor = 1
 
     def increase_speed(self):
         scale = self.speedup_scale

@@ -2,23 +2,23 @@ import pygame as pg
 from pygame.sprite import Sprite
 from game_functions import clamp
 from vector import Vector
-from sys import exit
 from timer import Timer
 
 
 class Ship(Sprite):
     ship_images = [pg.transform.rotozoom(pg.image.load(f'images/ship/ship.png'), 0, 1.0)]
-    ship_explosion_images = [pg.image.load(f'images/ship/ship_explode{n}.png')for n in range(10)]
+    ship_explosion_images =\
+        [pg.transform.rotozoom(pg.image.load(f'images/ship/ship_explode{n}.png'), 0, 1.0) for n in range(10)]
 
     def __init__(self, game):
-        super(Ship, self).__init__()
+        super().__init__()
         self.game = game
         self.screen = game.screen
         self.settings = game.settings
         self.sound = game.sound
+        self.sb = game.scoreboard
         self.ships_left = game.settings.ship_limit  
-        self.ships_start = game.settings.ship_limit  
-        self.image = pg.image.load('images/ship/ship.png')
+        self.image = pg.image.load('images/ship.png')
         self.rect = self.image.get_rect()
         self.screen_rect = game.screen.get_rect()
         self.posn = self.center_ship()    # posn is the centerx, bottom of the rect, not left, top
@@ -30,7 +30,7 @@ class Ship(Sprite):
         self.lasers_attempted = 0
 
         self.timer_normal = Timer(image_list=Ship.ship_images)
-        self.timer_explosion = Timer(image_list=Ship.ship_explosion_images, delay=200, is_loop=False)  
+        self.timer_explosion = Timer(image_list=Ship.ship_explosion_images, delay=100, is_loop=False)
         self.timer = self.timer_normal    
 
         self.dying = self.dead = False
@@ -40,21 +40,13 @@ class Ship(Sprite):
         self.rect.bottom = self.screen_rect.bottom
         return Vector(self.rect.left, self.rect.top)
 
-    def reset(self): 
+    def reset(self):
+        if self.game.game_is_over:
+            self.ships_left = self.settings.ship_limit
         self.vel = Vector()
         self.posn = self.center_ship()
         self.dying = self.dead = False
         self.lasers.reset()
-        self.timer = self.timer_normal
-        self.timer_explosion.reset()
-        self.rect.left, self.rect.top = self.posn.x, self.posn.y
-
-    def stop(self):
-        self.lasers.reset()
-        self.vel = Vector()
-        self.posn = self.center_ship()
-        self.dying = self.dead = False
-        self.ships_left = self.ships_start
         self.timer = self.timer_normal
         self.timer_explosion.reset()
         self.rect.left, self.rect.top = self.posn.x, self.posn.y
@@ -68,18 +60,18 @@ class Ship(Sprite):
     def really_dead(self):
         self.ships_left -= 1
         print(f'Ship is dead! Only {self.ships_left} ships left')
+        self.sb.decrease_lives(self)
         self.game.reset() if self.ships_left > 0 else self.game.game_over()
 
     def update(self):
         if self.timer == self.timer_explosion and self.timer.is_expired():
-            print('ship timer has expired it is now really dead ......')
             self.really_dead()
         self.posn += self.vel
         self.posn, self.rect = clamp(self.posn, self.rect, self.settings)
         if self.shooting:
             self.lasers_attempted += 1
             if self.lasers_attempted % self.settings.lasers_every == 0:
-                self.lasers.shoot(game=self.game, x = self.rect.centerx, y = self.rect.top)
+                self.lasers.shoot(game=self.game, x=self.rect.centerx, y=self.rect.top)
         self.lasers.update()
         self.draw()
 
